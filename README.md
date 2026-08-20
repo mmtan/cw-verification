@@ -3,6 +3,7 @@
 This repository contains the C++17 verification programs accompanying the paper
 
 **New Nonexistence Results for Circulant Weighing Matrices**.
+http://arxiv.org/abs/2608.18468
 
 The programs reproduce the finite computations used in the nonexistence proofs in the paper.
 
