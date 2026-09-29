@@ -1,7 +1,6 @@
-// Exact verification for Character and Multiplier Obstructions for
-// Circulant Weighing Matrices. Reconstructed from the stated finite systems.
-// Integer arithmetic only. No original repository implementation is used.
-// See README.md for the supported cases, integer bounds, and commands.
+// Exact finite verification for the computations in
+// "Character and Multiplier Obstructions for Circulant Weighing Matrices".
+
 #include <algorithm>
 #include <array>
 #include <cstdint>
@@ -134,20 +133,29 @@ void eisenstein(){
  check(seen.size()==6,"Appendix representatives not distinct");
 }
 void localfour(){int tot=0,n3=0;for(int a=-1;a<=1;a++)for(int b=-1;b<=1;b++)for(int c=-1;c<=1;c++)for(int d=-1;d<=1;d++){tot++;if(abs(a+b+c+d)==3){n3++;check(abs(a-b+c-d)==1,"C4 local character failure");}}cout<<"C4 local fibers tested "<<tot<<"; |principal sum|=3 fibers "<<n3<<"\n";}
-int main(int argc,char**argv){try{
- if(argc>1){string mode=argv[1];
-  check((mode=="real"&&argc==7)||(mode=="gauss"&&argc==6),
-        "Usage: verify_cw [real n multiplier bound sum energy | gauss n energy bound sum]");
-  if(mode=="real"){int n=stoi(argv[2]),t=stoi(argv[3]),b=stoi(argv[4]),s=stoi(argv[5]),e=stoi(argv[6]);vector<int>h;for(int j=1;j<=n/2;j++)h.push_back(j);realtest(n,t,b,s,e,h);return 0;}if(mode=="gauss"){gausstest(stoi(argv[2]),stoi(argv[3]),stoi(argv[4]),stoi(argv[5]));return 0;}}
+int main(){try{
  vector<int>h35;for(int h=1;h<=17;h++)h35.push_back(h);
  realtest(35,4,3,6,36,h35,{1434,163,14,14,14,6,6,2,2,2,2,2,2,2,2,2,2,2});
  realtest(35,4,4,6,36,h35,{1600,189,20,20,20,8,8,2,2,2,2,2,2,2,2,2,2,2});
- eisenstein();localfour();
+ eisenstein();
+ localfour();
+
+ // Weight 64: the original three cases and the four extensions.
  gausstest(35,64,2,8,{1,2,3,4,5},{1152,4,4,4,4,0});
  gausstest(45,64,2,8,{1,2,3},{58188,1242,1242,0});
  gausstest(49,64,2,8,{1},{32,0});
+ gausstest(55,64,2,8,{1},{8,0});
+ vector<int>h85;for(int h=1;h<=42;h++)h85.push_back(h);
+ vector<U64>e85={737310,7141,7141,128,128,24,24,20,20};
+ while(e85.size()<43)e85.push_back(16);
+ gausstest(85,64,2,8,h85,e85);
+ gausstest(95,64,2,8,{1},{0,0});
+ gausstest(215,64,2,8,{1},{0,0});
+
+ // Weight 49.
  realtest(20,7,6,7,49,{5,10},{716,76,0});
  realtest(116,7,1,7,49,{1,2,3,4},{6088,624,40,16,0},true);
- realtest(64,7,3,7,49,{1,2,3,4,5,6,7,8,11,12,16,24},{22880810,5952866,455924,413640,14670,14670,7836,7836,338,338,22,4,0},true);
- cout<<"ALL ASSERTED INDEPENDENT CHECKS PASSED\n";
-}catch(exception&e){cerr<<e.what()<<'\n';return 1;}}
+ realtest(64,7,3,7,49,{1,2,3,4,5,6,7,8,11,12,16,24},
+          {22880810,5952866,455924,413640,14670,14670,7836,7836,338,338,22,4,0},true);
+ cout<<"ALL C++ VERIFICATION CHECKS PASSED\n";
+}catch(exception&e){cerr<<"Verification failed: "<<e.what()<<'\n';return 1;}}
