@@ -9,10 +9,10 @@ The revised manuscript proves nonexistence results for circulant weighing matric
 
 The parameters treated in the revised manuscript include
 
-CW(105,36), CW(140,36), CW(116,49), CW(120,49), CW(192,49), and 
-CW(v,64) for v = 140,180,196,220,340,380,860. 
+$CW(105,36), CW(140,36), CW(116,49), CW(120,49), CW(192,49),$ and 
+$CW(v,64)$ for $v\in{ 140,180,196,220,340,380,860}.$
 
-The paper also proves the nonexistence of \(CW(20p,64)\) whenever \(p\) is an odd prime for which the multiplicative order of \(2\) modulo \(p\) is congruent to \(2\pmod 4\).
+The paper also proves the nonexistence of $CW(20p,64)$ whenever $p$ is an odd prime for which the multiplicative order of $2$ modulo $p$ is congruent to $2 \pmod 4$. 
 
 ## Files
 
